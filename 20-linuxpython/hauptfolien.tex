@@ -1,28 +1,37 @@
-{
-\footnotesize
-
 %%% Folie
-\begin{frame}{Lernziele}
-    \begin{block}{Linux}
-        \begin{itemize}
-            \item Raspberry Pi OS Lite installieren und einrichten können
-            \item Den typischen Aufbau eines Linux-Systems beschreiben können
-            \item Den Bootvorgang von Linux auf des Raspberry Pi erklären können
-            \item Die wichtigsten Verzeichnisse einer Linux-Installation kennen
-            \item Die Benutzer- und Rechteverwaltung von Linux grob verstehen
-        \end{itemize}
-    \end{block}
+{
+\scriptsize
 
-    \begin{block}{Python}
-        \begin{itemize}
-            \item Eigene Pythonprojekte anlegen und ausprogrammieren können
-            \item Dokumentation und Bibliotheken zur Python online suchen
-            \item Die grundlegenden Eigenheiten von Python beschreiben können
-            \item Einfache Pythonprogramme selbst programmieren können
-            \item Fehler suchen und Pythonprogramme im Debugger testen können
-            \item Größere Programme mit Klassen und Objekten strukturieren können
-        \end{itemize}
-    \end{block}
+\begin{frame}{Lernziele}
+    \begin{columns}
+        \begin{column}{.7\textwidth}
+            \begin{block}{Linux}
+                \begin{itemize}
+                    \item Raspberry Pi OS Lite installieren und einrichten können
+                    \item Den typischen Aufbau eines Linux-Systems beschreiben können
+                    \item Den Bootvorgang von Linux auf des Raspberry Pi erklären können
+                    \item Die wichtigsten Verzeichnisse einer Linux-Installation kennen
+                    \item Die Benutzer- und Rechteverwaltung von Linux grob verstehen
+                \end{itemize}
+            \end{block}
+
+            \begin{block}{Python}
+                \begin{itemize}
+                    \item Eigene Pythonprojekte anlegen und ausprogrammieren können
+                    \item Dokumentation und Bibliotheken zur Python online suchen
+                    \item Die grundlegenden Eigenheiten von Python beschreiben können
+                    \item Einfache Pythonprogramme selbst programmieren können
+                    \item Fehler suchen und Pythonprogramme im Debugger testen können
+                    \item Größere Programme mit Klassen und Objekten strukturieren können
+                \end{itemize}
+            \end{block}
+        \end{column}
+
+        \begin{column}{.3\textwidth}
+            \includegraphics[width=\textwidth]{img/lernziele1}
+            \includegraphics[width=\textwidth]{img/lernziele2}
+        \end{column}
+    \end{columns}
 \end{frame}
 }
 
@@ -742,9 +751,474 @@
 \end{frame}
 }
 
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}{Einfache Versuche im Interpreter}
+    \begin{columns}
+        \column[T]{.7\textwidth}
+        \includegraphics[width=\textwidth]{img/python-interpreter-idle}
+
+        \includegraphics[width=\textwidth]{img/python-interpreter-ipython}
+
+        \column[T]{.3\textwidth}
+        \Justified{
+            Für einfache Versuche oder kleine Wegwerfskripte bietet Python einen
+            einfachen Kommandozeileninterpreter, der jede eingegebene Codezeile
+            direkt ausführt und ihr Ergebnis ausgibt. Das Prinzip wird auch REPL
+            genannt von \textit{Read, Evaluate, Print, Loop}.
+            \smallskip
+
+            Traditionell wird der Interpreter, wie im unteren Bild gezeigt, mit dem
+            Befehl \texttt{python} in einem Konsolenfenster gestartet. Wobei hier
+            die verbesserte Version \texttt{ipython} (separat zu installieren)
+            gezeigt wird.
+            \smallskip
+
+            Alternativ kann aber auch die im Lieferumfang von Python enthaltene
+            grafische Anwendung IDLE gestartet werden.
+        }
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}{Aufbau eines typischen Python-Projekts}
+    \includegraphics[width=\textwidth]{img/verzeichnisse-venv}
+    \smallskip
+
+    \Justified{
+        Python schreibt im Grunde genommen keine feste Verzeichnisstruktur für ein
+        Projekt vor. Dennoch folgen die meisten Projekte den folgenden Konventionen:
+    }
+
+    \begin{itemize}
+        \item Im Hauptverzeichnis liegen nur ein README und allgemeine Konfigurationsdateien.
+        \item Der eigentliche Quellcode des liegt in einem Unterverzeichnis.
+        \item Dieses wird durch eine Datei namens \texttt{\_\_init\_\_.py} als Python-Modul gekennzeichnet.
+        \item Weitere Verzeichnisse können Dokumentationen und sonstige Zusatzdaten beinhalten.
+        \item Benötigte Zusatzbibliotheken werden in die Datei \texttt{requirements.txt} eingetragen.
+        \item Die Installation der Bibliotheken erfolgt in einer virtuellen Python-Umgebung.
+    \end{itemize}
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}[fragile]{Virtuelle Python-Umgebungen verwalten}
+    \includegraphics[width=\textwidth]{img/env-aktivieren}
+
+    \Justified{
+        \medskip
+        Python bot schon früh die Möglichkeit, zusätzliche Codebibliotheken aus dem Internet zu laden
+        und auf dem eigenen Rechner zu installieren. Traditionell werden die Bibliotheken allerdings
+        systemweit installiert, so dass alle Python-Programme dieselben Bibliotheken nutzen. Da aber
+        nicht alle Bibliotheken zusammenpassen oder manche Programm unterschiedliche Versionen einer
+        Bibliothek verwenden können, kann dies schnell zu Konflikten führen.
+        \medskip
+
+        Python ermöglicht es daher, in einem Unterverzeichnis eine isolierte Python-Umgebung für ein
+        einzelnes Projekt zu erstellen. Der exakte Inhalt des Verzeichnisses ist für die praktische
+        Nutzung dabei gar nicht relevant. Nur, dass dort die Bibliotheken exakt eines Projekts getrennt von
+        den anderen Projekten installiert werden. Folgende Kommandozeilenbefehle werden hierfür benötigt:
+        \medskip
+    }
+
+    {
+    %~ \tiny
+    \arrayrulecolor{gray}
+
+    \begin{tabular}{|p{.95\textwidth}|}
+        \hline
+
+        \cellcolor{gray!15}
+        \texttt{python -m venv env} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Neue Pythonumgebung im Verzeichnis \texttt{env} anlegen} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{source env/bin/activate} bzw. \\
+        \texttt{. env/bin/activate} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{\textbf{Linux, Mac:} Python-Umgebung für die laufende Konsolensitzung aktivieren} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{env\textbackslash Scripts\textbackslash activate} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{\textbf{Windows:} Python-Umgebung für die laufende Konsolensitzung aktivieren} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{deactivate} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Aktuelle aktive Python-Umgebung wieder verlassen} \\
+
+        \hline
+    \end{tabular}
+    }
+
+    \medskip
+    \LinkButton{https://realpython.com/python-virtual-environments-a-primer/}{Ausführliche Anleitung}
+\end{frame}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}[fragile]{Abhängigkeiten installieren mit pip}
+    \includegraphics[width=\textwidth]{img/pip-install}
+
+    \includegraphics[width=\textwidth]{img/pip-list}
+
+    \Justified{
+        \medskip
+        Die Installation und Deinstallation der Bibliotheken erfolgt mit dem Kommandozeilenwerkzeug
+        \texttt{pip} durch Ausführen der unten aufgeführten Befehle. Dabei hat es sich als Best-Practice
+        etabliert, die Bibliotheken und ihre Versionen in einer Datei namens \texttt{requirements.txt}
+        zu beschreiben, damit die Installation jederzeit reproduziert werden kann:
+    }
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Farbige und formatierte Konsolenausgaben
+        rich~=13.2
+    \end{lstlisting}
+
+    {
+    %~ \tiny
+    \arrayrulecolor{gray}
+
+    \begin{tabular}{|p{.95\textwidth}|}
+        \hline
+
+        \cellcolor{gray!15}
+        \texttt{pip install -r requirements.txt} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Alle in der angegebenen Datei aufgezählten Bibliotheken installieren} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{pip install \textit{bibliothek}} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Manuelle Installation einer einzelnen Bibliothek (nicht empfohlen!)} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{pip uninstall \textit{bibliothek}} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Manuelle Deinstallation einer einzelnen Bibliothek (nicht empfohlen!)} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{pip list} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Bereits installierte Bibliotheken und ihre Version auflisten} \\
+
+        \hline
+    \end{tabular}
+    }
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}[fragile]{Verwendung der Bibliothek und Start der Anwendung}
+    \Justified{
+        Bei aktivierter virtueller Python-Umgebung kann die Anwendung wie folgt gestartet werden.
+        Die hier verwendete Bibliothek \texttt{rich} wurde zuvor dem Projekt hinzugefügt.
+    }
+
+    \includegraphics[width=\textwidth]{img/venv-ausfuehren}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        #! /usr/bin/env python
+        """
+        Minimalbeispiel für ein typisches Python-Projekt.
+        """
+
+        import rich
+        from rich.prompt import Prompt
+
+        if __name__ == "__main__":
+            name = Prompt.ask(
+                "[bold bright_magenta]Wie heißt du?[/bold bright_magenta]",
+                default="Kain Ame"
+            )
+
+            eis = Prompt.ask(
+                "[bold bright_magenta]Welches ist dein Lieblingseis?[/bold bright_magenta]",
+                choices = ["Schokolade", "Vanille", "Erdbeer"],
+                default = "Erdbeer"
+            )
+
+            rich.print(f"Hallo, [red]{name}[/red]. Dein Lieblingseis ist [blue]{eis}[/blue]. :red_heart-emoji:\n")
+    \end{lstlisting}
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}{Poetry als moderne Alternative}
+    \includegraphics[width=\textwidth]{img/verzeichnisse-poetry}
+    \smallskip
+
+    \Justified{
+        Für Umsteiger von anderen Programmiersprachen wie zum Beispiel JavaScript/Node.js scheint
+        die manuelle Verwaltung virtueller Python-Umgebungen sicher etwas umständlich. In den letzten
+        Jahren sind deshalb viele Werkzeuge zur Automatisierung und Vereinfachung wie Poetry erschienen.
+        Die Konventionen für die Verzeichnisstruktur sind nahezu dieselben wie bei den älteren Werkzeugen.
+        Jedoch entfällt hier das Verzeichnis für die virtuelle Umgebung, da dieses von Poetry automatisch
+        außerhalb des Projektverzeichnisses angelegt wird:
+    }
+
+    \begin{itemize}
+        \item Im Hauptverzeichnis liegen nur ein README und allgemeine Konfigurationsdateien.
+        \item Der eigentliche Quellcode des liegt in einem Unterverzeichnis.
+        \item Dieses wird durch eine Datei namens \texttt{\_\_init\_\_.py} als Python-Modul gekennzeichnet.
+        \item Weitere Verzeichnisse können Dokumentationen und sonstige Zusatzdaten beinhalten.
+    \end{itemize}
+
+    \Justified{
+        Ebenfalls neu ist die Datei \texttt{pyproject.toml}, welche die \texttt{requirements.txt}
+        ersetzt. Sie enthält neben den benötigten Bibliotheken noch weitere Einstellungen für
+        das Projekt. Die Datei \texttt{poetry.lock} stellt sicher, das bei einer Wiederholung der
+        Installation die exakt gleichen Versionen aller Bibliotheken installiert werden.
+        \smallskip
+    }
+
+    \LinkButton{https://python-poetry.org/}{Poetry Paketverwaltung}
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}[fragile]{Wichtige Befehle für Poetry}
+    \includegraphics[width=\textwidth]{img/poetry-show}
+
+    \Justified{
+        \medskip
+        Alle für die Arbeit an einem Projekt relevanten Aufgaben können mit dem \texttt{poetry}
+        Kommandozeilenwerkzeug erledigt werden. Eine Unterscheidung, ob eine virtuelle Python-Umgebung
+        verwaltet oder Bibliotheken darin installiert werden sollen, gibt es nicht. Peoptry kümmert
+        sich im Hintergrund selbstständig darum, eine virtuelle Umgebung für das Projekt anzulegen
+        und zu verwalten.
+        \medskip
+    }
+
+    {
+    %~ \tiny
+    \arrayrulecolor{gray}
+
+    \begin{tabular}{|p{.95\textwidth}|}
+        \hline
+
+        \cellcolor{gray!15}
+        \texttt{poetry init} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Anlegen eines neuen Python-Projekts} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{poetry install} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Erzeugen der Python-Umgebung und Installation aller bekannten Abhängigkeiten} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{poetry add \textit{bibliothek}} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Installieren und Hinzufügen einer weiteren Bibliothek zum aktuellen Projekt} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{poetry remove \textit{bibliothek}} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Deinstallieren und Entfernen einer Bibliothek aus dem aktuellen Projekt} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{poetry show} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Informationen zu allen installierten Bibliotheken anzeigen} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{poetry run \textit{befehl}} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Ausführen des übergebenen Kommandozielenbefehls innerhalb der Python-Umgebung} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{poetry shell} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Start einer Sub-Shell mit aktivierter, virtueller Pyhton-Umgebung} \\
+
+        \cellcolor{gray!7}
+        \\
+
+        \cellcolor{gray!15}
+        \texttt{poetry shell} \\
+        \cellcolor{gray!15}
+        \textcolor{darkgray}{Verlassen der Sub-Shell und somit der virtuellen Python-Umgebung} \\
+
+        \hline
+    \end{tabular}
+    }
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}[fragile]{Start eines Poetry-Projekts}
+    \includegraphics[width=\textwidth]{img/poetry-run1}
+
+    \includegraphics[width=\textwidth]{img/poetry-run2}
+
+    \Justified{
+        \medskip
+        Mit dem Kommando \texttt{poetry run \textit{befehl}} lässt sich die virtuelle Python-Umgebung
+        temporär für die Ausführung das angegebenen Betriebssystembefehls aktivieren. Meistens wird
+        dies einfach nur genutzt, um die Anwendung wie oben gezeigt zu starten. Es kann aber auch eine
+        IDE wie Visual Studio Code somit gestartet werden, um ein Debuggen der Anwendung darin zu
+        ermöglichen:
+    }
+
+    \begin{lstlisting}[language=sh, gobble=8]
+        poetry run code
+    \end{lstlisting}
+
+    \includegraphics[width=\textwidth]{img/poetry-vscode}
+\end{frame}
+}
+
+% Code und Screenshot
+
+%-------------------------------------------------------------------------------
+\section{Praxisbeispiel: KI-Bildgenerator}
+%-------------------------------------------------------------------------------
+
+\begin{frame}{Version 1: Einfaches Skript}
+    \textbf{Verzeichnisstruktur}
+    \includegraphics[width=\textwidth]{img/ipaint-dateien-version1}
+
+    \textbf{Programmausgabe}
+    \includegraphics[width=\textwidth]{img/ipaint-ausgabe-version1}
+
+    \Justified{
+        \medskip
+        Dies ist die simpelste Version des Beispiels. Es handelt sich um ein ganz
+        einfaches Python-Skript, das eine fest einprogrammierte Anfrage an den DALL-E
+        Text2Image-Bildgenerator von OpenAI sendet und dann ein Browserfenster mit dem
+        erzeugten Bild öffnet. Durch Anpassen des Quellcodes können aber schon ganz interessante
+        Ergebnisse erzielt werden.
+        \medskip
+    }
+
+    \begin{columns}
+        \column[T]{.2\textwidth}
+        \includegraphics[width=\textwidth]{img/ipaint-generiert1}
+
+        \column[T]{.2\textwidth}
+        \includegraphics[width=\textwidth]{img/ipaint-generiert2}
+
+        \column[T]{.2\textwidth}
+        \includegraphics[width=\textwidth]{img/ipaint-generiert3}
+
+        \column[T]{.2\textwidth}
+        \includegraphics[width=\textwidth]{img/ipaint-generiert4}
+
+        \column[T]{.2\textwidth}
+        \includegraphics[width=\textwidth]{img/ipaint-generiert5}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Version 2: Klassenbasierte Struktur}
+    \textbf{Verzeichnisstruktur}
+    \includegraphics[width=\textwidth]{img/ipaint-dateien-version2}
+
+    \textbf{Programmausgabe}
+    \includegraphics[width=\textwidth]{img/ipaint-ausgabe-version2}
+
+    \Justified{
+        \medskip
+        Diese Version unterscheidet sich deutlich von der Vorgängerversion. Anstelle
+        des einfachen Skripts tritt eine richtige Python-Anwendung, die mit Klassen
+        und Modulen strukturiert wurde:
+        \smallskip
+
+        Beispielsweise übernimmt die Klasse \texttt{ApiKeyManager} das Einlesen und
+        Bereitstellen der API-Keys. Im Unterpaket \texttt{generator} befinden sich
+        hingegen eine allgemeine Schnittstelle für beliebige Text2Image-Bildgeneratoren
+        sowie eine konkrete Implementierung anhand von OpenAI DALL-E. Das Hauptprogramm
+        muss daher lediglich den Dialog mit dem Anwender umsetzen und dabei die jeweiligen
+        Klassen verwenden. Auf dieser Grundlage kann das Programm beliebig weiterentwickelt
+        werden. Der Fantasie sind keine Grenzen gesetzt. \smiley{}
+    }
+\end{frame}
+
+\begin{frame}{Version 3: Grafische Benutzeroberfläche}
+    \textbf{Verzeichnisstruktur}
+    \includegraphics[width=\textwidth]{img/ipaint-dateien-version3}
+
+    \textbf{Programmausgabe}
+    \includegraphics[width=\textwidth]{img/ipaint-ausgabe-version3}
+
+    \Justified{
+        \medskip
+        Diese Version baut auf der vorherigen Version auf und ersetzt die bisher sehr
+        spartanische Benutzerinteraktion durch ein modernes Text User Interface. Der
+        meiste Quellcode ist daher identisch. Lediglich die Datei \texttt{main.py} musste
+        hierfür neugeschrieben werden, wobei hier wieder die \texttt{textual}-Bibliothek
+        zum Einsatz kommt.
+    }
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% TODO: Weitere Folien %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Ggf. hier Code-Ausschnitte anhand derer die Sprache Python erklärt werden kann.
+% Shebang, Allgemeine Syntax, if __name__ ..., Funktionen definieren und aufrufen,
+% Objekte erzeugen, Variablen und Duck Typing, Klassen definieren, ...
 
 %%% Folie
 \begin{frame}[allowframebreaks]{ChatGPT über Duck Typing}
@@ -758,6 +1232,16 @@
     \begin{center}
         \includegraphics[width=.9\textwidth]{img/chatgpt-ducktyping2}
     \end{center}
+
+    \begin{center}
+        \includegraphics[width=.24\textwidth]{img/duck-typing1}
+        \hfill
+        \includegraphics[width=.24\textwidth]{img/duck-typing2}
+        \hfill
+        \includegraphics[width=.24\textwidth]{img/duck-typing3}
+        \hfill
+        \includegraphics[width=.24\textwidth]{img/duck-typing4}
+    \end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -766,16 +1250,20 @@
 
 %%% Folie
 \begin{frame}{Ergebnis unseres kleinen Programms}
-    \begin{columns}
-        \column[T]{.4\textwidth}
-        \includegraphics[width=\textwidth]{img/ai-gallery1}
+    %~ \begin{columns}
+        %~ \column[T]{.4\textwidth}
+        %~ \includegraphics[width=\textwidth]{img/ai-gallery1}
 
-        \column[T]{.4\textwidth}
-        \includegraphics[width=\textwidth]{img/ai-gallery2}
-    \end{columns}
+        %~ \column[T]{.4\textwidth}
+        %~ \includegraphics[width=\textwidth]{img/ai-gallery2}
+    %~ \end{columns}
 
-    \begin{columns}
-        \column[T]{.8\textwidth}
-        \includegraphics[width=\textwidth]{img/ai-gallery3}
-    \end{columns}
+    %~ \begin{columns}
+        %~ \column[T]{.8\textwidth}
+        %~ \includegraphics[width=\textwidth]{img/ai-gallery3}
+    %~ \end{columns}
+
+    \begin{center}
+        \includegraphics[width=\textwidth]{img/ai-gallery}
+    \end{center}
 \end{frame}
