@@ -877,6 +877,41 @@
 
 %%% Folie
 {
+\scriptsize
+
+\begin{frame}{Probleme mit der PowerShell unter Windows}
+    \Justified{
+        Die Sicherheitseinstellungen von Windows verbieten normalerweise die
+        Ausführung von PowerShell-Skripten. Dies dient als Vorsorge gegen
+        Skript-Viren, die bis in die frühen 2000er-Jahre ein großes Problem
+        darstellten. Dadurch bricht die Aktivierung eines Python-Environments
+        allerdings mit einer Fehlermeldung ab.
+    }
+
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{img/powershell1}
+    \end{center}
+
+    \Justified{
+        Um die entsprechende Einstellung zu ändern, muss die PowerShell einmal
+        als Administrator geöffnet werden. Folgender Befehle fragen die Einstellung
+        ab, bzw. ändern sie:
+        \smallskip
+
+        \texttt{Get-ExecutionPolicy} \\
+        \texttt{Set-ExecutionPolicy RemoteSigned -Scope CurrentUser}
+    }
+
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{img/powershell2}
+    \end{center}
+
+    \LinkButton{https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3}{Dokumentation von Microsoft}
+\end{frame}
+}
+
+%%% Folie
+{
 \tiny
 
 \begin{frame}[fragile]{Abhängigkeiten installieren mit pip}
